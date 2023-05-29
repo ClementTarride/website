@@ -1,30 +1,23 @@
 <template>
-    <body>
-    <div>
-        <div id="app">
-        <NavbarMenu />
-      </div>
-      <div id="login">
-        <BtnLogin />
-      </div>
+  <body>
+    <div class="app">
+      <NavbarMenu />
     </div>
   </body>
-  </template>
-  
-  <script>
-  import NavbarMenu from './NavBar.vue'
-  import BtnLogin from './BtnLogin.vue'
-  
-  export default {
-    name: 'first_page',
-    components: {
-      NavbarMenu,
-      BtnLogin
-    },
+</template>
+
+<script>
+import NavbarMenu from './NavBar.vue';
+
+export default {
+  name: "first_page",
+  components: {
+    NavbarMenu,
   }
-  </script>
-  
-  <style>
+};
+</script>
+
+<style>
   #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -36,5 +29,4 @@
   body{
     background: #2c3e50;
   }
-  </style>
-  
+</style>

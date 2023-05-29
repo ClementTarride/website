@@ -20,7 +20,7 @@ const UserSchema = mongoose.Schema({
     type: Boolean
   },
   Message : Array,
-  picture : Array
+  image : String
 });
 
 module.exports = mongoose.model('User',UserSchema);

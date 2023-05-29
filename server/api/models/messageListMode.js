@@ -4,13 +4,13 @@ const Schema = mongoose.Schema;
 const MessageSchema = mongoose.Schema({
   title: {
     type: String,
-    required: true,
   },
   username : {
     type: String,
     required : true
   },
-  commentaire : String
+  commentaire : String,
+  urlimage : String
 });
 
 module.exports = mongoose.model('Message',MessageSchema);

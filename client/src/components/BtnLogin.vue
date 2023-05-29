@@ -98,18 +98,17 @@ import axios from 'axios';
                 password : this.password
             }
             console.log(user)
-            axios.post('http://localhost:3000/loginin', user)
+            axios.post('http://localhost:3000/login', user)
              .then (res => {
-                console.log(res)
                 console.log("was here 200")
-                if(res.status == 200){
+                if(res.status === 200){
                     localStorage.setItem('token',res.data.token);
-                    this.$router.push('/landing');
+                    console.log("ready to push");
+                    this.router.push('/landing');
                 }
              }, err => {
                 console.log("was here error")
                 console.log(err.response);
-                this.error = err.response.data.error
              },)
         },
     }

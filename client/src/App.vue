@@ -1,4 +1,6 @@
 <template>
-    <RouterView></RouterView>
+    <body>
+        <RouterView></RouterView>
+    </body>
 </template>
 

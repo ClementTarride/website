@@ -4,7 +4,8 @@ const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 const User = require('./api/models/userListModel.js');
 const jwt = require('jsonwebtoken');
-
+const cors = require('cors');
+const message_support = require('./api/models/messagesupport.js');
 
 mongoose.connect('mongodb+srv://DumUser:"Vinment66@cluster0.1xzemyp.mongodb.net/?retryWrites=true&w=majority', {
   useNewUrlParser: true,
@@ -14,9 +15,12 @@ mongoose.connect('mongodb+srv://DumUser:"Vinment66@cluster0.1xzemyp.mongodb.net/
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 const app = express();
+app.use(cors);
 app.use(bodyParser.json());
 
-app.post ('/registerUser',(req,res,next)=>{
+// routes 
+
+app.post ('/registerUser',(req,res)=>{
     const user = new User({
         username : req.body.Username,
         email : req.body.email,
@@ -28,7 +32,8 @@ app.post ('/registerUser',(req,res,next)=>{
     .catch(error => res.status(400).json({error : error}));
 });
 
-app.post('/loginin', (req, res, next) => {
+
+app.post('/login', (req, res) => {
   console.log("entré")
   User.findOne({ email: req.body.email })
     .exec()
@@ -65,6 +70,17 @@ app.post('/loginin', (req, res, next) => {
   console.log(req.body);
 });
 
+
+
+app.get('/user',(req,res) =>{
+  let token =req.headers.token;
+  jwt.verify(token, 'secretkey', (err,decoded) =>{
+    if (err) return res.status(401).json({
+      title : 'unauthorized',
+    })
+    console.log(decoded);
+  })
+})
 
 
 

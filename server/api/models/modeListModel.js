@@ -1,12 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const bcrypt = require('bcrypt');
 
 const BossSchema = mongoose.Schema({
-  username: {
-    type: String,
-    required: true,
-    unique : true
-  },
   password: {
     type: String,
     required: true
@@ -16,11 +12,20 @@ const BossSchema = mongoose.Schema({
     required: true,
     unique : true
   },
-  Mode : {
-    type: Boolean
-  },
-  Boss : {
-    type : Boolean
+});
+
+BossSchema.pre('save', async function (next) {
+  if (this.isModified('password') || this.isNew) {
+    try {
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(this.password, salt);
+      this.password = hashedPassword;
+      next();
+    } catch (error) {
+      return next(error);
+    }
+  } else {
+    return next();
   }
 });
 
